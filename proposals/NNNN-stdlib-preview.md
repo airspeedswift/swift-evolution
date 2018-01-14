@@ -7,15 +7,15 @@
 
 ## Introduction
 
-This propopsal introduces a new "staging area" for additions to the standard
+This proposal introduces a new "staging area" for additions to the standard
 library, as a package that follows the evolution process, allowing for use
 and feedback on proposed APIs in a production setting prior to adding them
 to the ABI-stable standard library.
 
 ## Motivation
 
-There are a large number of features to the Swift standard librar which would
-be considered standard for a langugage's standard library. Expansions of the
+There are a large number of features to the Swift standard library which would
+be considered standard for a language's standard library. Expansions of the
 String API, the addition of more collections algorithms such as for searching
 and sorting, and other collections such as sorted sets/dictionaries, are all
 important for a full "batteries included" set of features.
@@ -28,7 +28,7 @@ size does still matter).
 
 But the flip side of this is that an ABI stable library needs to take extreme
 care to get APIs right on the first iteration, because once published in an
-ABI-stable library, there are restrctions on how the API can be evolved in
+ABI-stable library, there are restrictions on how the API can be evolved in
 future versions. An open process of feedback for the standard library has been
 highly useful in improving it's usability and functionality.
 
@@ -60,18 +60,27 @@ release of Swift.
 
 Additions to this package will follow the standard evolution process and will
 require a review on the evolution forums, and approval by the core team.
-However, given this library will not be ABI-stable, evolution of APIs along
-the lines of the old will
-be possible.
+
+Given this library will be a source package, more flexible evolution of APIs will
+be possible. The library should follow the semantic versioning conventions, so
+major versions can make source-breaking changes. However, since the goal of
+the package is to encourage production use and feedback,
+each major version should continue to be maintained in a useable state
+with each new release of Swift.
+
+The goal of every addition to the library is that it will eventually become part
+of the official standard library. This would be done through a evolution-reviewed revision
+to the proposal that added it to the preview package. When a feature does eventually migrate
+to the standard library, it would be deprecated from the preview library in the current major
+version (with a `renamed` entry pointing to the Swift standard library equivalent), and
+obsoleted in the subsequent major version.
+
+A process would need to be established for tracking the migration process of additions
+to ensure that they do eventually migrate. Entries in the preview library that do not after
+a prolonged period of time should be removed.
 
 ## Detailed design
 
-Describe the design of the solution in detail. If it involves new
-syntax in the language, show the additions and changes to the Swift
-grammar. If it's a new API, show the full API and its documentation
-comments detailing what it does. The detail in this section should be
-sufficient for someone who is *not* one of the authors to be able to
-reasonably implement the feature.
 
 ## Source compatibility
 
