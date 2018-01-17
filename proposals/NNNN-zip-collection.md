@@ -37,9 +37,19 @@ extension Zip2Collection: RandomAccessCollection
 where Collection1: RandomAccessCollection, Collection2: RandomAccessCollection { }
 ```
 
-Return this type from 
+Note that the new type.
 
-Note that the 
+
+Return this type from an overload of `zip` for collections:
+
+```swift
+public func zip<Collection1, Collection2>(
+  _ collection1: Collection1, _ collection2: Collection2
+) -> Zip2Collection<Collection1, Collection2> {
+  return Zip2Collection(collection1, collection2)
+}
+```
+
 
 ## Detailed design
 
