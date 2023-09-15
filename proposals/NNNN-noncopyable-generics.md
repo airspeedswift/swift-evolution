@@ -34,6 +34,8 @@
     - [`AnyObject`](#anyobject)
     - [Tuples](#tuples)
     - [Packs](#packs)
+  - [Effect on ABI stability](#effect-on-abi-stability)
+  - [Effect on API resilience](#effect-on-api-resilience)
   - [Case Studies](#case-studies)
     - [Swift Standard Library](#swift-standard-library)
   - [Alternatives Considered](#alternatives-considered)
@@ -756,6 +758,10 @@ TODO: is this legal? `func f<T>(_ t: T) where T: AnyObject, T: ~Copyable {}`
 ### Tuples
 
 ### Packs
+
+## Effect on ABI stability
+
+## Effect on API resilience
 
 ## Case Studies
 
