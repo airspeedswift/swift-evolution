@@ -13,6 +13,39 @@
 * Previous Revision: *if applicable* [1](https://github.com/apple/swift-evolution/blob/...commit-ID.../proposals/NNNN-filename.md)
 * Review: ([pitch](https://forums.swift.org/...)) -->
 
+## Table of Contents
+- [Noncopyable Generics](#noncopyable-generics)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Motivation](#motivation)
+  - [Proposed Solution](#proposed-solution)
+    - [Copying and `Copyable`](#copying-and-copyable)
+    - [General type parameters](#general-type-parameters)
+    - [Structs and enums](#structs-and-enums)
+      - [Automatic synthesis of conditional `Copyable` conformance](#automatic-synthesis-of-conditional-copyable-conformance)
+    - [Classes](#classes)
+    - [Protocols](#protocols)
+      - [Inheritance](#inheritance)
+    - [Source Compatibility](#source-compatibility)
+    - [Custom Defaults](#custom-defaults)
+      - [Defaults for constrained generics](#defaults-for-constrained-generics)
+  - [Detailed Design](#detailed-design)
+    - [The top type](#the-top-type)
+    - [`AnyObject`](#anyobject)
+    - [Tuples](#tuples)
+    - [Packs](#packs)
+  - [Case Studies](#case-studies)
+    - [Swift Standard Library](#swift-standard-library)
+  - [Alternatives Considered](#alternatives-considered)
+    - [Do not introduce a new type syntax `T ~ Copyable`](#do-not-introduce-a-new-type-syntax-t--copyable)
+    - [Avoid having to write `~Copyable` on constrained protocols](#avoid-having-to-write-copyable-on-constrained-protocols)
+    - [Avoid needing to specify the copyability of protocols entirely](#avoid-needing-to-specify-the-copyability-of-protocols-entirely)
+  - [Future Directions](#future-directions)
+    - [Infinite Defaults](#infinite-defaults)
+      - [Bottomless Constraint Subjects](#bottomless-constraint-subjects)
+  - [Acknowledgments](#acknowledgments)
+
+
 ## Introduction
 
 The noncopyable types introduced in [SE-0390: Noncopyable structs and
