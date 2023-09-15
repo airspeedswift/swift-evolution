@@ -696,6 +696,21 @@ func g<T>(_ t: T)
         /* , T: Copyable */ {}    // via standard default for type parameter T
 ```
 
+Removing defaults from a specific type is particularly important for classes,
+since they cannot become noncopyable themselves:
+
+```swift
+protocol Graph {
+  associatedtype Vertex: ~Copyable
+  default extension where Self.Vertex: Copyable
+}
+
+class Network: Graph ~ Copyable {
+  typealias Vertex = Socket
+  struct Socket: ~Copyable { /* ... */ }
+}
+```
+
 Protocol inheritance is also similar, as it is sugar for constraining the
 protocol's `Self` to some other protocol:
 
